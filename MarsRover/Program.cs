@@ -97,79 +97,56 @@ namespace MarsRover
                 switch (talimat.ToString().ToLower())
                 {
                     case "l":
+                    {
+                        arac.Yonu = arac.Yonu switch
                         {
-                            if (arac.Yonu == Yon.East)
-                                arac.Yonu = Yon.North;
-
-                            else if (arac.Yonu == Yon.North)
-                                arac.Yonu = Yon.West;
-
-                            else if (arac.Yonu == Yon.West)
-                                arac.Yonu = Yon.South;
-
-                            else
-                                arac.Yonu = Yon.East;
-                            break;
-                        }
+                            Yon.East => Yon.North,
+                            Yon.North => Yon.West,
+                            Yon.West => Yon.South,
+                            _ => Yon.East
+                        };
+                        break;
+                    }
 
                     case "r":
+                    {
+                        arac.Yonu = arac.Yonu switch
                         {
-                            if (arac.Yonu == Yon.East)
-                                arac.Yonu = Yon.South;
-
-                            else if (arac.Yonu == Yon.South)
-                                arac.Yonu = Yon.West;
-
-                            else if (arac.Yonu == Yon.West)
-                                arac.Yonu = Yon.North;
-
-                            else
-                                arac.Yonu = Yon.East;
-                            break;
-                        }
+                            Yon.East => Yon.South,
+                            Yon.South => Yon.West,
+                            Yon.West => Yon.North,
+                            _ => Yon.East
+                        };
+                        break;
+                    }
                     case "m":
                         {
                             // Araç x ve y koordinatlarından hareket ettiriliyor ve dışarı taşması kontrol ediliyor.
                             if (arac.Yonu == Yon.East)
                                 if (arac.X <= x)
-                                {
                                     arac.X++;
-                                }
                                 else
-                                {
                                     Console.WriteLine("Hata : X Koordinatı aşıldı.");
-                                }
 
                             else if (arac.Yonu == Yon.South)
                                 if (arac.Y > 0)
-                                {
                                     arac.Y--;
-                                }
                                 else
-                                {
                                     Console.WriteLine("Hata : Y Koordinatı aşıldı.");
-                                }
 
                             else if (arac.Yonu == Yon.West)
                                 if (arac.X > 0)
-                                {
                                     arac.X--;
-                                }
                                 else
-                                {
                                     Console.WriteLine("Hata : X Koordinatı aşıldı.");
-                                }
 
                             else
                             {
                                 if (arac.Y <= y)
-                                {
                                     arac.Y++;
-                                }
+                                
                                 else
-                                {
                                     Console.WriteLine("Hata : Y Koordinatı aşıldı.");
-                                }
                             }
                             break;
                         }
