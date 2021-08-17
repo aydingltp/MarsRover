@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Xml.Schema;
 
 namespace MarsRover
 {
@@ -12,7 +10,6 @@ namespace MarsRover
             var araclar = new List<Arac>();
 
             Console.WriteLine("Platonun sağ üst koordinatlarını giriniz : Orn => 66");
-
             try
             {
                 var sagUstKoordinatAsString = Console.ReadLine();
@@ -53,14 +50,21 @@ namespace MarsRover
                         break;
                 } while (Console.ReadKey().Key == ConsoleKey.Enter);
 
-                // Araçlar Keşfe Çıkarılıyor.
-                var result = AraclariKesfeCikar(sagUstKoordinatX, sagUstKoordinatY, araclar);
+
+                // Araçlar sırayla keşfe çıkarılılarak talimatları yerine getirmesi sağlanıyor.
+                var result = new List<Arac>();
+
+                foreach (var arac in araclar)
+                {
+                    result.Add(arac.TalimatlariYerineGetir(arac, sagUstKoordinatX, sagUstKoordinatY));
+                }
+                
 
                 Console.WriteLine("--------------------");
 
                 for (var i = 0; i < result.Count; i++)
                 {
-                    Console.WriteLine(i + ". araç : " + result[i].X + " " + result[i].Y + " " + result[i].Yonu);
+                    Console.WriteLine(i + ". araç : " + result[i].X + " " + result[i].Y + " " + result[i].Yonu.ToString()[..1]);
                 }
 
                 Console.WriteLine("--------------------");
@@ -74,87 +78,7 @@ namespace MarsRover
             }
 
         }
-
-        private static List<Arac> AraclariKesfeCikar(int sagUstX, int sagUstY, List<Arac> araclar)
-        {
-            var result = new List<Arac>();
-
-            // Araçlar sırayla talimatları yerine getiriyor.
-            foreach (var arac in araclar)
-            {
-                result.Add(TalimatlariYerineGetir(arac, sagUstX, sagUstY));
-            }
-
-            return result;
-        }
-
-        private static Arac TalimatlariYerineGetir(Arac arac, int x, int y)
-        {
-            char[] talimatDizisi = arac.Talimat.ToCharArray();
-
-            foreach (var talimat in talimatDizisi)
-            {
-                switch (talimat.ToString().ToLower())
-                {
-                    case "l":
-                    {
-                        arac.Yonu = arac.Yonu switch
-                        {
-                            Yon.East => Yon.North,
-                            Yon.North => Yon.West,
-                            Yon.West => Yon.South,
-                            _ => Yon.East
-                        };
-                        break;
-                    }
-
-                    case "r":
-                    {
-                        arac.Yonu = arac.Yonu switch
-                        {
-                            Yon.East => Yon.South,
-                            Yon.South => Yon.West,
-                            Yon.West => Yon.North,
-                            _ => Yon.East
-                        };
-                        break;
-                    }
-                    case "m":
-                        {
-                            // Araç x ve y koordinatlarından hareket ettiriliyor ve dışarı taşması kontrol ediliyor.
-                            if (arac.Yonu == Yon.East)
-                                if (arac.X <= x)
-                                    arac.X++;
-                                else
-                                    Console.WriteLine("Hata : X Koordinatı aşıldı.");
-
-                            else if (arac.Yonu == Yon.South)
-                                if (arac.Y > 0)
-                                    arac.Y--;
-                                else
-                                    Console.WriteLine("Hata : Y Koordinatı aşıldı.");
-
-                            else if (arac.Yonu == Yon.West)
-                                if (arac.X > 0)
-                                    arac.X--;
-                                else
-                                    Console.WriteLine("Hata : X Koordinatı aşıldı.");
-
-                            else
-                            {
-                                if (arac.Y <= y)
-                                    arac.Y++;
-                                
-                                else
-                                    Console.WriteLine("Hata : Y Koordinatı aşıldı.");
-                            }
-                            break;
-                        }
-                }
-            }
-
-            return arac;
-        }
+        
 
     }
 }
