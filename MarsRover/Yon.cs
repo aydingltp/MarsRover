@@ -6,10 +6,10 @@ namespace MarsRover
 {
     public enum Yon
     {
-        N,
-        W,
-        E,
-        S
+        North,
+        West,
+        East,
+        South
     }
 
 }

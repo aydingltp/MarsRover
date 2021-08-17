@@ -98,39 +98,39 @@ namespace MarsRover
                 {
                     case "l":
                         {
-                            if (arac.Yonu == Yon.E)
-                                arac.Yonu = Yon.N;
+                            if (arac.Yonu == Yon.East)
+                                arac.Yonu = Yon.North;
 
-                            else if (arac.Yonu == Yon.N)
-                                arac.Yonu = Yon.W;
+                            else if (arac.Yonu == Yon.North)
+                                arac.Yonu = Yon.West;
 
-                            else if (arac.Yonu == Yon.W)
-                                arac.Yonu = Yon.S;
+                            else if (arac.Yonu == Yon.West)
+                                arac.Yonu = Yon.South;
 
                             else
-                                arac.Yonu = Yon.E;
+                                arac.Yonu = Yon.East;
                             break;
                         }
 
                     case "r":
                         {
-                            if (arac.Yonu == Yon.E)
-                                arac.Yonu = Yon.S;
+                            if (arac.Yonu == Yon.East)
+                                arac.Yonu = Yon.South;
 
-                            else if (arac.Yonu == Yon.S)
-                                arac.Yonu = Yon.W;
+                            else if (arac.Yonu == Yon.South)
+                                arac.Yonu = Yon.West;
 
-                            else if (arac.Yonu == Yon.W)
-                                arac.Yonu = Yon.N;
+                            else if (arac.Yonu == Yon.West)
+                                arac.Yonu = Yon.North;
 
                             else
-                                arac.Yonu = Yon.E;
+                                arac.Yonu = Yon.East;
                             break;
                         }
                     case "m":
                         {
                             // Araç x ve y koordinatlarından hareket ettiriliyor ve dışarı taşması kontrol ediliyor.
-                            if (arac.Yonu == Yon.E)
+                            if (arac.Yonu == Yon.East)
                                 if (arac.X <= x)
                                 {
                                     arac.X++;
@@ -140,7 +140,7 @@ namespace MarsRover
                                     Console.WriteLine("Hata : X Koordinatı aşıldı.");
                                 }
 
-                            else if (arac.Yonu == Yon.S)
+                            else if (arac.Yonu == Yon.South)
                                 if (arac.Y > 0)
                                 {
                                     arac.Y--;
@@ -150,7 +150,7 @@ namespace MarsRover
                                     Console.WriteLine("Hata : Y Koordinatı aşıldı.");
                                 }
 
-                            else if (arac.Yonu == Yon.W)
+                            else if (arac.Yonu == Yon.West)
                                 if (arac.X > 0)
                                 {
                                     arac.X--;
